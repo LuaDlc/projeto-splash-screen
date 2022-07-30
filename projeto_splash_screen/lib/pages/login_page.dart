@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:projeto_splash_screen/components/login/custom_login_button_component.dart';
 import 'package:projeto_splash_screen/controllers/login_controller.dart';
+import 'package:projeto_splash_screen/widgets/custom_text_field_widget.dart';
 
 class LoginPage extends StatelessWidget {
-   LoginController _controller = LoginController();
+   final LoginController _controller = LoginController();
  LoginPage({Key? key}) : super(key: key);
 
 
@@ -18,25 +20,17 @@ class LoginPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(Icons.people, size: MediaQuery.of(context).size.height * 0.3),
-            TextField(
-              decoration: InputDecoration(
-                label: Text('Login'),
-              ),
-              onChanged: _controller.setLogin,
+            CustomTextFieldWidget(label: 'login',
+            onChanged: _controller.setLogin
             ),
-            TextField(
-              decoration: InputDecoration(
-                label: Text('Login'),
-              ),
-              onChanged: _controller.setPass,
-              obscureText: true,
+            CustomTextFieldWidget(label: 'senha',
+            onChanged: _controller.setPass,
+            obscureText: true,
             ),
+            
             SizedBox(height: 15),
-            ElevatedButton(onPressed: () {
-              _controller.auth();
-            },
-            child:Text('login'),
-            ),
+            CustomLoginButtonComponent(loginController: _controller,
+            )
           ],
         )
       )
