@@ -3,6 +3,7 @@ import 'package:projeto_splash_screen/repositories/home_repository_imp.dart';
 
 import '../controllers/home_controller.dart';
 import '../models/post_model.dart';
+import '../services/prefs_service.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -26,6 +27,13 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Home'),
+        actions: [IconButton(onPressed: () {
+          PrefsService.logout();
+          Navigator.of(context).pushNamedAndRemoveUntil('/login', (_) => true);
+        },
+        icon: Icon(Icons.logout),
+        ),
+        ],
       ),
       body: ValueListenableBuilder<List<PostModel>>(
         valueListenable: _controller.posts,
